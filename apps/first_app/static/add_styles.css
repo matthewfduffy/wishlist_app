@@ -1,0 +1,11 @@
+body{
+    width: 960px;
+    height: auto;
+    margin: 0 auto;
+    background-color: rgb(123, 186, 31);
+    font-family: 'Roboto Slab', serif;
+}
+
+h2 {
+    display: inline;
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Main</title>
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static './main_styles.css' %}" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+    </head>
+    <body>
+        <header id="main_landing">
+            <h1>Hello {{request.session.username}}</h1>
+            {% if 'id' in request.session %}
+                <a href="/logout">Logout</a>
+                {% else %}
+                    <a href="/login">Login</a>
+            {% endif %}
+        </header>
+        <div id="user_item">
+            <h2>Your Wish List:</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Added By</th>
+                            <th>Date Added</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for f in favorite %}
+                            <tr>
+                                <td><a href="/shared/{{f.item.id}}">{{f.item.item}}</a></td>
+                                <td>{{f.item.user.first_name}}</td>
+                                <td>{{f.item.created_at}}</td>
+                                {% if f.item.user.id == request.session.id %}
+                                    <td><a href="/delete/{{f.item.id}}">Delete</a></td>
+                                    {% else %}
+                                    <td><a href="/remove/{{f.id}}">Remove From List</a></td>
+                                {% endif %}
+                            </tr>
+                            {% endfor %}
+                    </tbody>
+                </table>
+        </div>
+        <div id="all_lists">
+            <h2>Other User's Wish List:</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Added By</th>
+                            <th>Date Added</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for a in all_items %}
+                            {% if a not in exclude %}
+                            <tr>
+                                <td><a href="/shared/{{a.item.id}}">{{a.item}}</a></td>
+                                <td>{{a.user.first_name}}</td>
+                                <td>{{a.created_at}}</td>
+                                <td><a href="save/{{a.id}}">Add to my Wishlist</a></td>
+                            </tr>
+                            {%  endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+        </div>
+        <a href="/add">Add Item</a>
+    </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Index</title>
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static './index_styles.css' %}" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <h1>Welcome!</h1>
+        </header>
+        <div id="register">
+        <h1>Register:</h1>
+        <form action="/register" method="POST">
+            {% csrf_token %}
+            <label for="username">Username: </label>
+            <input type="text" name="username"><br />
+            <label for="first_name">First Name: </label>
+            <input type="text" name="first_name"><br />
+            <label for="last_name">Last Name: </label>
+            <input type="text" name="last_name"><br />
+            <label for="email">Email: </label>
+            <input type="text" name="email"><br />
+            <label for="password">Password: </label>
+            <input type="password" name="password"><br />
+            <label for="confirm_password">Confirm: </label>
+            <input type="password" name="confirm_password"><br />
+            <input type="submit" value="Register">
+      </form>
+    </div>
+    <div id="login">
+      <h1>Log in:</h1>
+      <form action="/login" method="POST">
+          {% csrf_token %}
+          <label for="email">Email: </label>
+          <input type="text" name="email"><br />
+          <label for="password">Password: </label>
+          <input type="password" name="password"><br />
+          <input type="submit" value="Log in">
+      </form>
+      {% if messages %}
+      <ul class="messages">
+      {% for message in messages %}
+        <li {% if message.tags %} class="{{message.tags}}"{% endif %}>{{message}}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+    </body>
+</html>

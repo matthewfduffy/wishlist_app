@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Add</title>
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static './add_styles.css' %}" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+    </head>
+    <body>
+        <header id="add_landing">
+            <h2>Create a New Wish List Item</h2>
+            <a href="/main">Home</a>
+            {% if 'id' in request.session %}
+                <a href="/logout">Logout</a>
+                {% else %}
+                    <a href="/login">Login</a>
+            {% endif %}
+        </header>
+        <div id="add_item">
+            <form action="/add_item" method="post">
+                {% csrf_token %}
+                <label for="add">Item/Product:</label>
+                <input type="text" name="product" required placeholder="Add an item" /><br />
+                <a heref="/add_item"><button>Add</button></a>
+            </form>
+        </div>
+        {% if messages %}
+        <ul class="messages">
+        {% for message in messages %}
+          <li {% if message.tags %} class="{{message.tags}}"{% endif %}>{{message}}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    </body>
+</html>

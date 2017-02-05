@@ -1,0 +1,37 @@
+body{
+    width: 960px;
+    height: auto;
+    margin: 0 auto;
+    background-color: rgb(123, 186, 31);
+    font-family: 'Roboto Slab', serif;
+}
+
+form input{
+    margin-left: 9em;
+}
+
+form label{
+    position: absolute;
+}
+
+#login, #register{
+    display: inline-block;
+    margin-top: 45px;
+    border: 4px outset rgba(13, 14, 15, 0.47);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+#login{
+    vertical-align: top;
+    margin-left: 100px;
+    padding-bottom: 110px;
+}
+
+h1{
+    display: inline;
+}
+
+header{
+    margin-top: 30px;
+}

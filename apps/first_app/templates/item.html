@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Items</title>
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static './add_styles.css' %}" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <a href="/main">Home</a>
+            {% if 'id' in request.session %}
+                <a href="/logout">Logout</a>
+                {% else %}
+                    <a href="/login">Login</a>
+            {% endif %}
+        </header>
+        {% for i in item %}
+        <h1>{{i.item.item}}</h1>
+        {% endfor %}
+        <h2>Users who added this product/item under their wish list:</h2>
+        {% for u in users %}
+            {{u.user.first_name}}
+
+        {% endfor %}
+    </body>
+</html>
